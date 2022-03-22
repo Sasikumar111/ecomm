@@ -14,4 +14,13 @@ steps:
   inputs:
     rootFolderOrFile: '$(build.sourcesDirectory)'
     includeRootFolder: false
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial (58eac04d-d24e-49f4-bcd4-137cf832063c)'
+    appType: 'webAppLinux'
+    WebAppName: 'ecomm'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'NODE|12-lts'
+    StartupCommand: 'sudo systemctl start httpd'
 - task: PublishBuildArtifacts@1
